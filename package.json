@@ -14,6 +14,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "lightweight-charts": "^3.7.0",
     "lodash": "^4.17.21",
     "next": "12.0.9",
     "react": "17.0.2",
