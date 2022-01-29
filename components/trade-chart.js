@@ -1,22 +1,31 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { round } from 'lodash'
-import { createChart } from 'lightweight-charts';
-import data from './data'
+import { createChart, isBusinessDay } from 'lightweight-charts';
 
-const toolTipTemplate = ({ dateStr, price }) => `<div style="font-size: 24px; margin: 4px 0px; color: #20262E">AEROSPACE</div><div style="font-size: 22px; margin: 4px 0px; color: #20262E">${price}</div><div>${dateStr}</div>`
+const toolTipTemplate = ({ dateStr, price, name }) => `<div style="font-size: 24px; margin: 4px 0px; color: #20262E">${name}</div>
+<div style="font-size: 22px; margin: 4px 0px; color: #20262E">${price}</div>
+<div>${dateStr}</div>`
 
-const width = '800px'
-const height = '500px'
+const width = '600px'
+const height = '400px'
 
-const TradeChart = () => {
+const TradeChart = ({ data, name }) => {
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
   const tooltipRef = useRef(document.createElement('div'))
+  const seriesRef = useRef(null)
 
   const setLastBarText = useCallback(() => {
-    const { year, month, day } = data[data.length - 1].time
-    const dateStr = `${year}-${month}-${day}`;
-    tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price: data[data.length - 1].value })
+    if (data.length) {
+      const utcTime = data[data.length - 1].time
+      const year = new Date(utcTime).getUTCFullYear()
+      const month = new Date(utcTime).getUTCMonth() + 1
+      const day = new Date(utcTime).getUTCDate()
+      const min = new Date(utcTime).getUTCMinutes()
+      const hour = new Date(utcTime).getUTCHours()
+      const dateStr = `${year}-${month}-${day} ${hour}:${min}`;
+      tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price: data[data.length - 1]?.value, name })
+    }
   }, [data, tooltipRef])
 
   useEffect(() => {
@@ -42,8 +51,8 @@ const TradeChart = () => {
 
   useEffect(() => {
     chartRef.current = createChart(chartContainerRef.current, {
-      width: 800,
-      height: 500,
+      width: 600,
+      height: 400,
       rightPriceScale: {
         scaleMargins: {
           top: 0.35,
@@ -53,6 +62,18 @@ const TradeChart = () => {
       },
       timeScale: {
         borderVisible: false,
+        rightOffset: 12,
+        barSpacing: 3,
+        // fixLeftEdge: true,
+        lockVisibleTimeRangeOnResize: true,
+        rightBarStaysOnScroll: true,
+        borderColor: '#fff000',
+        visible: true,
+        timeVisible: true,
+        secondsVisible: false,
+        tickMarkFormatter: (time, tickMarkType, locale) => {
+          return `${new Date(time).getUTCHours()}:${new Date(time).getUTCMinutes()}`;
+        },
       },
       grid: {
         horzLines: {
@@ -78,28 +99,33 @@ const TradeChart = () => {
       },
     })
 
-    var series = chartRef.current.addAreaSeries({
+    seriesRef.current = chartRef.current.addAreaSeries({
       topColor: 'rgba(19, 68, 193, 0.4)',
       bottomColor: 'rgba(0, 120, 255, 0.0)',
       lineColor: 'rgba(19, 40, 153, 1.0)',
-      lineWidth: 3
+      lineWidth: 2,
     })
+  }, [])
 
-    series.setData(data);
+  useEffect(() => {
+    seriesRef.current.setData(data);
     setLastBarText()
 
     chartRef.current.subscribeCrosshairMove(param => {
       if (param === undefined || param.time === undefined || param.point.x < 0 || param.point.x > width || param.point.y < 0 || param.point.y > height) {
         setLastBarText();
       } else {
-        console.log(param)
-        const { year, month, day } = param.time
-        const dateStr = `${year}-${month}-${day}`;
-        const price = param.seriesPrices.get(series);
-        tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price: round((price * 100) / 100, 2) })
+        const year = new Date(param.time).getUTCFullYear()
+        const month = new Date(param.time).getUTCMonth() + 1
+        const day = new Date(param.time).getUTCDate()
+        const min = new Date(param.time).getUTCMinutes()
+        const hour = new Date(param.time).getUTCHours()
+        const dateStr = `${year}-${month}-${day} ${hour}:${min}`;
+        const price = param.seriesPrices.get(seriesRef.current);
+        tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price: round((price * 100) / 100, 2), name })
       }
     })
-  }, [setLastBarText, chartContainerRef])
+  }, [setLastBarText, data])
 
   return <div className="line-series-chart" ref={chartContainerRef} />
 }

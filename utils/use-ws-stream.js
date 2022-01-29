@@ -37,12 +37,12 @@ const useWsStream = (symbol) => {
         const updatedLatestPrices = latestPrices.map(lp => lp.symbol === result.s ? updatedSymbol : lp)
         setLatestPrices(updatedLatestPrices)
       } else {
-        setLatestPrices(data => [...data, { symbol: result.s, currentPrice: result.c }])
+        setLatestPrices(data => [...data, { symbol: result.s, currentPrice: result.c, time: result.E }])
       }
     }
   }, [isPaused, setLatestPrices, latestPrices])
 
-  return { data: latestPrices, setIsPaused }
+  return { prices: latestPrices }
 }
 
 export default useWsStream
