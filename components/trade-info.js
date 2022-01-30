@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { round, head } from "lodash"
 import dynamic from "next/dynamic";
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import useExchangeRate from "../utils/use-exchange-rate"
 import useWsStream from "../utils/use-ws-stream"
 import PriceCard from "./price-card";
@@ -47,15 +48,17 @@ const TradeInfo = () => {
 
   return (
     <>
+    <Box sx={{flexGrow: 1}}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {prices.length > 0 && (
           prices.map(price => (
-            <Grid key={price.symbol} item lg={4} md={6} sm={12}>
+            <Grid key={price.symbol} item xs={12} md={6} lg={4}>
               < PriceCard data={price} inrPrice={convertedINR} />
             </Grid>
           )))
         }
       </Grid>
+    </Box>
       {/* <TradeChart data={convertedSandData} name={name} /> */}
     </>
   )

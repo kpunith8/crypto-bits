@@ -9,6 +9,13 @@ import { round } from 'lodash'
 import allSymbols from '../utils/static/symbols-data';
 import Divider from '@mui/material/Divider';
 import Image from 'next/image';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+  cardItem: {
+    padding: theme.spacing(2),
+  },
+}))
 
 const PriceCard = ({ data, inrPrice }) => {
   const symbol = useMemo(() => data.symbol.slice(0, -4), [data.symbol])
@@ -23,9 +30,9 @@ const PriceCard = ({ data, inrPrice }) => {
   }, [symbol, data.currentPrice, inrPrice])
 
   const percentageMove = useMemo(() => round((data.currentPrice - data.closePrice) / data.currentPrice * 100, 2), [data.currentPrice, data.closePrice])
-
+  const classes = useStyles()
   return (
-    <Card sx={{ minWidth: 200, maxWidth: 250 }}>
+    <Card>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
@@ -35,14 +42,14 @@ const PriceCard = ({ data, inrPrice }) => {
         title={symbol}
         subheader={symbolName}
       />
-      <CardContent>
+      <CardContent style={{paddingBottom: 16}}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <div>
             <Typography variant="body2" color="text.secondary">
-              {`$${round(data.currentPrice, 4)}`}
+              {`$${round(data.currentPrice, 2)}`}
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              {`₹${round(inrPrice * data.currentPrice, 4)}`}
+              {`₹${round(inrPrice * data.currentPrice, 2)}`}
             </Typography>
           </div>
           <div style={{ display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
