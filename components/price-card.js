@@ -71,13 +71,9 @@ const PriceCard = ({ data, inrPrice }) => {
   console.log({ last24HrChange })
 
   return (
-    <Card>
+    <Card raised>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe">
-            {symbolData.icon && <Image src={symbolData.icon} />}
-          </Avatar>
-        }
+        avatar={symbolData.icon && <Image src={symbolData.icon} height="35" width="35" alt={symbol} />}
         title={symbol}
         subheader={symbolData.name}
       />
