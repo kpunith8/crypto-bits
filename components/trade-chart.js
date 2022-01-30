@@ -3,7 +3,7 @@ import { round } from 'lodash'
 import { createChart, isBusinessDay } from 'lightweight-charts';
 
 const toolTipTemplate = ({ dateStr, price, name }) => `<div style="font-size: 24px; margin: 4px 0px; color: #20262E">${name}</div>
-<div style="font-size: 22px; margin: 4px 0px; color: #20262E">${price}</div>
+<div style="font-size: 22px; margin: 4px 0px; color: #20262E">${round((price * 100) / 100, 4)}</div>
 <div>${dateStr}</div>`
 
 const width = '600px'
@@ -122,7 +122,7 @@ const TradeChart = ({ data, name }) => {
         const hour = new Date(param.time).getUTCHours()
         const dateStr = `${year}-${month}-${day} ${hour}:${min}`;
         const price = param.seriesPrices.get(seriesRef.current);
-        tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price: round((price * 100) / 100, 2), name })
+        tooltipRef.current.innerHTML = toolTipTemplate({ dateStr, price, name })
       }
     })
   }, [setLastBarText, data])

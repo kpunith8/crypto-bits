@@ -37,7 +37,7 @@ const useWsStream = (symbol) => {
         const updatedLatestPrices = latestPrices.map(lp => lp.symbol === result.s ? updatedSymbol : lp)
         setLatestPrices(updatedLatestPrices)
       } else {
-        setLatestPrices(data => [...data, { symbol: result.s, currentPrice: result.c, time: result.E }])
+        setLatestPrices(data => [...data, { symbol: result.s, currentPrice: +result.c, time: result.E, closePrice: +result.l }])
       }
     }
   }, [isPaused, setLatestPrices, latestPrices])
