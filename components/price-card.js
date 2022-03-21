@@ -68,8 +68,6 @@ const PriceCard = ({ data, inrPrice }) => {
     }
   }, [data, symbol, inrPrice])
 
-  console.log({ last24HrChange })
-
   return (
     <Card raised>
       <CardHeader

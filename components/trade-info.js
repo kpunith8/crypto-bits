@@ -48,17 +48,17 @@ const TradeInfo = () => {
 
   return (
     <>
-    <Box sx={{flexGrow: 1}}>
-      <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {prices.length > 0 && (
-          prices.map(price => (
-            <Grid key={price.symbol} item xs={12} md={6} lg={4}>
-              < PriceCard data={price} inrPrice={convertedINR} />
-            </Grid>
-          )))
-        }
-      </Grid>
-    </Box>
+      <Box sx={{ flexGrow: 1 }} style={{padding: '20px 0'}}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          {prices.length > 0 ? (
+            prices.map(price => (
+              <Grid key={price.symbol} item xs={12} md={6} lg={4}>
+                <PriceCard data={price} inrPrice={convertedINR} />
+              </Grid>
+            ))) : (<div>Loading...</div>)
+          }
+        </Grid>
+      </Box>
       {/* <TradeChart data={convertedSandData} name={name} /> */}
     </>
   )

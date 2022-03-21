@@ -1,4 +1,5 @@
 
+import { sortBy, reverse } from 'lodash'
 import axsIcon from '../../public/axs-logo.svg'
 import adaIcon from '../../public/ada-logo.svg'
 import sandIcon from '../../public/sand-logo.svg'
@@ -12,17 +13,17 @@ import lunaIcon from '../../public/luna-logo.svg'
 import mcIcon from '../../public/mc-logo.svg'
 
 const allSymbols = [
-  { symbol: "AXS", totalCoins: 11.6, avgBuyPrice: 8344, icon: axsIcon, name: "Axie Infinity" },
-  { symbol: "ADA", totalCoins: 81, avgBuyPrice: 92.85, icon: adaIcon, name: "Cardano" },
-  { symbol: "SAND", totalCoins: 74, avgBuyPrice: 557, icon: sandIcon, name: "The Sandbox" },
-  { symbol: "NEAR", totalCoins: 23.8, avgBuyPrice: 840, icon: nearIcon, name: "Near Protocol" },
-  { symbol: "MC", totalCoins: 43, avgBuyPrice: 528, icon: mcIcon, name: "Merit Circle" },
-  { symbol: "MATIC", totalCoins: 51, avgBuyPrice: 188.2, icon: maticIcon, name: "Matic Network" },
-  { symbol: "SOL", totalCoins: 2.6, avgBuyPrice: 12843, icon: solIcon, name: "Solana" },
-  { symbol: "STX", totalCoins: 140, avgBuyPrice: 107.4, icon: stxIcon, name: "Stacks" },
-  { symbol: "CAKE", totalCoins: 23.9, avgBuyPrice: 853, icon: cakeIcon, name: "Cake Swap" },
-  { symbol: "FTM", totalCoins: 80, avgBuyPrice: 196, icon: ftmIcon, name: "Fantom" },
-  { symbol: "LUNA", totalCoins: 1.98, avgBuyPrice: 4767, icon: lunaIcon, name: "Terra" },
+  { symbol: "AXS", totalCoins: 11.6, avgBuyPrice: 8472, icon: axsIcon, name: "Axie Infinity" },
+  { symbol: "ADA", totalCoins: 251, avgBuyPrice: 75.3, icon: adaIcon, name: "Cardano" },
+  { symbol: "SAND", totalCoins: 99, avgBuyPrice: 480.4, icon: sandIcon, name: "The Sandbox" },
+  { symbol: "NEAR", totalCoins: 23.8, avgBuyPrice: 852, icon: nearIcon, name: "Near Protocol" },
+  { symbol: "MC", totalCoins: 43, avgBuyPrice: 536, icon: mcIcon, name: "Merit Circle" },
+  { symbol: "MATIC", totalCoins: 51, avgBuyPrice: 191.1, icon: maticIcon, name: "Matic Network" },
+  { symbol: "SOL", totalCoins: 4.09, avgBuyPrice: 10729, icon: solIcon, name: "Solana" },
+  { symbol: "STX", totalCoins: 140, avgBuyPrice: 109, icon: stxIcon, name: "Stacks" },
+  { symbol: "CAKE", totalCoins: 23.9, avgBuyPrice: 867, icon: cakeIcon, name: "Cake Swap" },
+  { symbol: "FTM", totalCoins: 80, avgBuyPrice: 199, icon: ftmIcon, name: "Fantom" },
+  { symbol: "LUNA", totalCoins: 1.98, avgBuyPrice: 4840, icon: lunaIcon, name: "Terra" },
 ]
 
-export default allSymbols
+export default reverse(sortBy(allSymbols, ({totalCoins, avgBuyPrice}) => totalCoins * avgBuyPrice))

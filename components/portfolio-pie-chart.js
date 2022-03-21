@@ -1,26 +1,34 @@
-import {map} from 'lodash'
+import { map } from 'lodash'
 import { Chart } from "react-google-charts";
-import allSymbols from '../utils/static/symbols-data'; 
+import allSymbols from '../utils/static/symbols-data';
 
 export const data = [
-  ["Symbol", "Total Portfolio"],
-  ...map(allSymbols, item => [item.symbol, item.totalCoins * item.avgBuyPrice])
+  ["Symbol", "Total Value"],
+  ...map(allSymbols, ({ symbol, totalCoins, avgBuyPrice }) => [symbol, totalCoins * avgBuyPrice])
 ];
 
+// For pieChart
+// const options = {
+//   is3D: true,
+//   legend: {
+//     alignment: "center",
+//   },
+//   titleTextStyle: {
+//     fontSize: 28,
+//   },
+// };
+
 const options = {
-  is3D: true,
-  legend: {
-    alignment: "center",
+  chart: {
+    title: "Cyrpto Portfolio",
+    subtitle: "Symbol, Coins, Total",
   },
-  titleTextStyle: {
-    fontSize: 28,
-  },
-};
+}
 
 const PortfolioPieChart = () => {
   return (
     <Chart
-      chartType="PieChart"
+      chartType="Bar"
       data={data}
       options={options}
       width={"100%"}

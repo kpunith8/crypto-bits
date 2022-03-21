@@ -13,10 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Typography variant="h4" component="h1" gutterBottom>
-          My Portfolio
-        </Typography>
+      <main style={{padding: '20px 0'}}>
         <PortfolioPieChart />
         <TradeInfo />
       </main>
