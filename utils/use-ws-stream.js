@@ -1,8 +1,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { toLower } from 'lodash'
-
-const allTickers = ["axsusdt@miniTicker", "nearusdt@ticker", "sandusdt@ticker", "solusdt@ticker", "ftmusdt@ticker", "stxusdt@ticker", "cakeusdt@ticker", "lunausdt@ticker", "mcusdt@ticker", "adausdt@ticker", "maticusdt@ticker"]
+import allTickers from './static/tickers.js'
 
 const useWsStream = (symbol) => {
   const [latestPrices, setLatestPrices] = useState([])

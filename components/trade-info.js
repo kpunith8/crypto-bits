@@ -14,21 +14,22 @@ const TradeChart = dynamic(() => import("./trade-chart"), {
 
 const TradeInfo = () => {
   const convertedINR = useExchangeRate("INR")
-  const { prices, sandData } = useWsStream()
-  const [sandSymData, setSandSymData] = useState([])
-  const [name, setName] = useState("SANDUSDT")
+  const { prices } = useWsStream()
+  // const [sandSymData, setSandSymData] = useState([])
+  // const [name, setName] = useState("SANDUSDT")
 
   // On initial load, get last 24hours data by 5 mins chunks data
   // startTime=${Date.now() - (5000 * 60)}&endTime=${Date.now()} - To fetch every 5 minutes
   // TODO: Temporary hack until the data is stored in the DB
   // TODO: Error handling
-  useEffect(() => {
+  /* useEffect(() => {
     fetch(`https://api.binance.com/api/v3/klines?symbol=SANDUSDT&interval=5m&limit=300&startTime=${Date.now() - (1000 * 60 * 60 * 24)}&endTime=${Date.now()}`).then(res => res.json()).then(data => {
       setSandSymData(prevData => [...prevData, ...data])
     }).catch(err => {
       console.error(err)
     })
   }, [])
+  */
   // TODO: Extarct to a component - try using AbortController
   // useEffect(() => {
   //   const timer = setInterval(() => {
@@ -43,8 +44,8 @@ const TradeInfo = () => {
   //   return () => clearInterval(timer)
   // }, [])
 
-  const convertedSandData = useMemo(() => sandSymData.map(data => ({ time: data[0], value: data[4] }))
-    , [sandSymData])
+  // const convertedSandData = useMemo(() => sandSymData.map(data => ({ time: data[0], value: data[4] }))
+  //   , [sandSymData])
 
   return (
     <>

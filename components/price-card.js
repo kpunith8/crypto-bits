@@ -23,7 +23,7 @@ const findSymbol = (symbol) => allSymbols.find(item => item.symbol === symbol)
 const PriceItem = ({ label, total, percentage }) => (
   <div style={{ display: 'flex', fontSize: 13 }}>
     <span>{`${label}:`}</span>
-    <span style={{ color: total > 0 ? 'green' : 'red', marginLeft: 10 }}>
+    <span style={{ color: total > 0 ? 'green' : 'red'}}>
       <div style={{ display: 'flex' }}>
         <span style={{ marginTop: -2 }}>{total > 0 ? <ArrowDropUpIcon sx={{ color: 'green' }} /> : <ArrowDropDownIcon sx={{ color: 'red' }} />}</span>
         <span>{`${total > 0 ? `+${total}` : `${total}`} (${percentage}%)`}</span>
@@ -85,7 +85,7 @@ const PriceCard = ({ data, inrPrice }) => {
               {`₹${round(inrPrice * data.currentPrice, 2)}`}
             </Typography>
           </div>
-          <div style={{ display: 'flex', alignItems: 'space-between', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', alignItems: 'space-between', flexDirection: 'column', width: 220}}>
             <PriceItem label="24Hr" total={last24HrChange.total} percentage={last24HrChange.percentage} />
             <PriceItem label="Total" total={totalPortfolio.total} percentage={totalPortfolio.percentage} />
           </div>

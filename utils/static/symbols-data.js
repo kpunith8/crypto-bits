@@ -6,11 +6,10 @@ import sandIcon from '../../public/sand-logo.svg'
 import nearIcon from '../../public/near-logo.svg'
 import maticIcon from '../../public/matic-logo.svg'
 import solIcon from '../../public/sol-logo.svg'
-import stxIcon from '../../public/stx-logo.svg'
 import cakeIcon from '../../public/cake-logo.svg'
-import ftmIcon from '../../public/ftm-logo.svg'
 import lunaIcon from '../../public/luna-logo.svg'
 import mcIcon from '../../public/mc-logo.svg'
+import bswIcon from '../../public/bsw-logo.svg'
 
 const allSymbols = [
   { symbol: "AXS", totalCoins: 11.6, avgBuyPrice: 8472, icon: axsIcon, name: "Axie Infinity" },
@@ -20,9 +19,8 @@ const allSymbols = [
   { symbol: "MC", totalCoins: 43, avgBuyPrice: 536, icon: mcIcon, name: "Merit Circle" },
   { symbol: "MATIC", totalCoins: 51, avgBuyPrice: 191.1, icon: maticIcon, name: "Matic Network" },
   { symbol: "SOL", totalCoins: 4.09, avgBuyPrice: 10729, icon: solIcon, name: "Solana" },
-  { symbol: "STX", totalCoins: 140, avgBuyPrice: 109, icon: stxIcon, name: "Stacks" },
+  { symbol: "BSW", totalCoins: 300, avgBuyPrice: 68.7, icon: bswIcon, name: "Biswap" },
   { symbol: "CAKE", totalCoins: 23.9, avgBuyPrice: 867, icon: cakeIcon, name: "Cake Swap" },
-  { symbol: "FTM", totalCoins: 80, avgBuyPrice: 199, icon: ftmIcon, name: "Fantom" },
   { symbol: "LUNA", totalCoins: 1.98, avgBuyPrice: 4840, icon: lunaIcon, name: "Terra" },
 ]
 
